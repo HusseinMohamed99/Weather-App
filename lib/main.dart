@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wakelock/wakelock.dart';
-import 'package:weather_app/main_screen.dart';
 import 'package:weather_app/weather/data/datasource/remote_datasource.dart';
 import 'package:weather_app/weather/data/repository/weather_repository.dart';
 import 'package:weather_app/weather/domain/entities/weather.dart';
 import 'package:weather_app/weather/domain/repository/base_weather_repository.dart';
 import 'package:weather_app/weather/domain/usecase/get_weather_by_country.dart';
+import 'package:weather_app/weather/presentation/screens/weather_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +19,12 @@ void main() async {
       WeatherRepository(baseRemoteDataSource);
 
   Weather weather =
-      await GetWeatherCountryName(baseWeatherRepository).execute("Moscow");
+      await GetWeatherCountryName(baseWeatherRepository).execute("Egypt");
+
   if (kDebugMode) {
-    print("Weather === $weather");
+    print("Weather == $weather");
   }
+
   runApp(const MyApp());
 }
 
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
           builder: (context, child) {
             return const MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: MainScreen(),
+              home: WeatherScreen(),
             );
           },
         );
